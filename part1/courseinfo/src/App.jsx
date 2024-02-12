@@ -1,41 +1,35 @@
-const Header = (props) => {
+const Header = ({course}) => {
   return (
     <>
-      <h1>{props.course}</h1>
+      <h1>{course.name}</h1>
     </>
   )
 }
 
-const Part = (props) => {
+const Content = ({course}) => {
+  return (
+    <>
+      <Part part = {course.parts[0]} />
+      <Part part = {course.parts[1]} />
+      <Part part = {course.parts[2]} />
+    </>
+  )
+}
+
+const Part = ({part}) => {
   return (
     <>
       <p>
-        {props.part1} {props.exercises1}
-      </p>
-      <p>
-        {props.part2} {props.exercises2}
-      </p>
-      <p>
-        {props.part3} {props.exercises3}
+        {part.name} {part.exercises}
       </p>
     </>
   )
 }
 
-const Content = (props) => {
+const Total = ({course}) => {
   return (
     <>
-      <Part part1 = {props.part1} exercises1 = {props.exercises1} />
-      <Part part2 = {props.part2} exercises2 = {props.exercises2} />
-      <Part part3 = {props.part3} exercises3 = {props.exercises3} />
-    </>
-  )
-}
-
-const Total = (props) => {
-  return (
-    <>
-      <p>Number of exercises {props.exercises1 + props.exercises2 + props.exercises3}</p>
+      <p>Number of exercises {course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises}</p>
     </>
   )
 }
@@ -58,13 +52,12 @@ const App = () => {
     }
   ]
 }
-console.log(course);
 
   return (
     <div>
-      <Header course = {course.name} />
-      <Content  parts = {course.parts} />  
-      <Total parts = {course.parts}/>
+      <Header course = {course} />
+      <Content  course = {course} />  
+      <Total course = {course}/>
     </div>
   )
 }
